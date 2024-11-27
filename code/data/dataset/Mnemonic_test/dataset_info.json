@@ -1,0 +1,292 @@
+{
+  "builder_name": "parquet",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "persona_alignment_test_clean_vague",
+  "dataset_size": 11585876,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/Mnemonic_fewshot-00000-of-00001-9f5b929b3484ddee.parquet": {
+      "num_bytes": 26068,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/Mnemonic_sft_train-00000-of-00001-c7464b99a9dc3e9f.parquet": {
+      "num_bytes": 84301,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/Mnemonic_sft_val-00000-of-00001-f5c535b651735d2c.parquet": {
+      "num_bytes": 43893,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/Mnemonic_dpo_train-00000-of-00001-b10899880d9ea592.parquet": {
+      "num_bytes": 83257,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/Mnemonic_dpo_val-00000-of-00001-1f8d76cef019c3a2.parquet": {
+      "num_bytes": 43286,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/Mnemonic_test-00000-of-00001-3149e81801fbff7c.parquet": {
+      "num_bytes": 64002,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/Safe_RLHF_fewshot-00000-of-00001-15567cdaf4fc3926.parquet": {
+      "num_bytes": 33350,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/Safe_RLHF_sft_train-00000-of-00001-23614cfe18bc4ce6.parquet": {
+      "num_bytes": 1097406,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/Safe_RLHF_sft_val-00000-of-00001-44fa8031f1376272.parquet": {
+      "num_bytes": 325615,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/Safe_RLHF_dpo_train-00000-of-00001-0910377208468443.parquet": {
+      "num_bytes": 1095436,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/Safe_RLHF_dpo_val-00000-of-00001-e82a429dd07fa737.parquet": {
+      "num_bytes": 332733,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/Safe_RLHF_test-00000-of-00001-6f8b0dfbd521937e.parquet": {
+      "num_bytes": 615135,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/HH_RLHF_fewshot-00000-of-00001-b1b6239ab85e70e7.parquet": {
+      "num_bytes": 31309,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/HH_RLHF_sft_train-00000-of-00001-b46aff04b500168d.parquet": {
+      "num_bytes": 391013,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/HH_RLHF_sft_val-00000-of-00001-dd075fbc4d0c13dd.parquet": {
+      "num_bytes": 131523,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/HH_RLHF_dpo_train-00000-of-00001-fd9778c7dd23c64b.parquet": {
+      "num_bytes": 386109,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/HH_RLHF_dpo_val-00000-of-00001-7d2a7c224e799573.parquet": {
+      "num_bytes": 127167,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona_alignment_test_clean_vague@093ada18c7858990d00d6ef7d30ae9e789f9abee/data/HH_RLHF_test-00000-of-00001-b49411fbc5fd6357.parquet": {
+      "num_bytes": 454531,
+      "checksum": null
+    }
+  },
+  "download_size": 5366134,
+  "features": {
+    "prompt": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "dataset": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "chosen": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "rejected": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "gpt4_chosen_persona_oracle": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "gpt4_rejected_persona_oracle": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "llama_chosen_persona_oracle": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "llama_rejected_persona_oracle": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "gpt4_chosen_quality_oracle": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "gpt4_rejected_quality_oracle": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "llama_chosen_quality_oracle": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "llama_rejected_quality_oracle": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "gpt4_chosen_persona_retr": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "gpt4_rejected_persona_retr": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "llama_chosen_persona_retr": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "llama_rejected_persona_retr": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "gpt4_chosen_quality_retr": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "gpt4_rejected_quality_retr": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "llama_chosen_quality_retr": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "llama_rejected_quality_retr": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "similar_prompt": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "similar_index": {
+      "dtype": "int64",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 16952010,
+  "splits": {
+    "Mnemonic_fewshot": {
+      "name": "Mnemonic_fewshot",
+      "num_bytes": 7652,
+      "num_examples": 5,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "Mnemonic_sft_train": {
+      "name": "Mnemonic_sft_train",
+      "num_bytes": 187107,
+      "num_examples": 126,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "Mnemonic_sft_val": {
+      "name": "Mnemonic_sft_val",
+      "num_bytes": 52334,
+      "num_examples": 35,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "Mnemonic_dpo_train": {
+      "name": "Mnemonic_dpo_train",
+      "num_bytes": 193837,
+      "num_examples": 132,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "Mnemonic_dpo_val": {
+      "name": "Mnemonic_dpo_val",
+      "num_bytes": 52221,
+      "num_examples": 35,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "Mnemonic_test": {
+      "name": "Mnemonic_test",
+      "num_bytes": 343683,
+      "num_examples": 500,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "Safe_RLHF_fewshot": {
+      "name": "Safe_RLHF_fewshot",
+      "num_bytes": 12101,
+      "num_examples": 5,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "Safe_RLHF_sft_train": {
+      "name": "Safe_RLHF_sft_train",
+      "num_bytes": 2434000,
+      "num_examples": 977,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "Safe_RLHF_sft_val": {
+      "name": "Safe_RLHF_sft_val",
+      "num_bytes": 615584,
+      "num_examples": 244,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "Safe_RLHF_dpo_train": {
+      "name": "Safe_RLHF_dpo_train",
+      "num_bytes": 2457392,
+      "num_examples": 982,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "Safe_RLHF_dpo_val": {
+      "name": "Safe_RLHF_dpo_val",
+      "num_bytes": 627421,
+      "num_examples": 246,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "Safe_RLHF_test": {
+      "name": "Safe_RLHF_test",
+      "num_bytes": 1254261,
+      "num_examples": 499,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "HH_RLHF_fewshot": {
+      "name": "HH_RLHF_fewshot",
+      "num_bytes": 9819,
+      "num_examples": 5,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "HH_RLHF_sft_train": {
+      "name": "HH_RLHF_sft_train",
+      "num_bytes": 919533,
+      "num_examples": 424,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "HH_RLHF_sft_val": {
+      "name": "HH_RLHF_sft_val",
+      "num_bytes": 223982,
+      "num_examples": 105,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "HH_RLHF_dpo_train": {
+      "name": "HH_RLHF_dpo_train",
+      "num_bytes": 897049,
+      "num_examples": 423,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "HH_RLHF_dpo_val": {
+      "name": "HH_RLHF_dpo_val",
+      "num_bytes": 221883,
+      "num_examples": 107,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    },
+    "HH_RLHF_test": {
+      "name": "HH_RLHF_test",
+      "num_bytes": 1076017,
+      "num_examples": 500,
+      "dataset_name": "persona_alignment_test_clean_vague"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

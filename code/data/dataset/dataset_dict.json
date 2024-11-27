@@ -1,0 +1,1 @@
+{"splits": ["Mnemonic_fewshot", "Mnemonic_sft_train", "Mnemonic_sft_val", "Mnemonic_dpo_train", "Mnemonic_dpo_val", "Mnemonic_test", "Safe_RLHF_fewshot", "Safe_RLHF_sft_train", "Safe_RLHF_sft_val", "Safe_RLHF_dpo_train", "Safe_RLHF_dpo_val", "Safe_RLHF_test", "HH_RLHF_fewshot", "HH_RLHF_sft_train", "HH_RLHF_sft_val", "HH_RLHF_dpo_train", "HH_RLHF_dpo_val", "HH_RLHF_test"]}
