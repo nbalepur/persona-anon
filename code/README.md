@@ -29,9 +29,9 @@ We have released the fine-tuning and DPO datasets used in persona tailoring, so 
 1. Navigate to `/model/`
 2. Set the specified parameters in `config.py` (described in the file)
 2. Run `python SFT/create_initial_model.py`. This creates the initial LLaMA model with an extra token for padding. Requires higher CPU memory (1024 GB for LLaMA-2 70B)
-3. Run `python SFT/train.py`. This trains the initial SMART model with supervised fine-tuning and LoRA. Requires higher GPU memory (192 GB for LLaMA-2 70B)
+3. Run `python SFT/train.py`. This trains the base model with supervised fine-tuning (SFT) and LoRA. Requires higher GPU memory (192 GB for LLaMA-2 70B)
 4. Run `python SFT/merge.py`. Merges the LoRA fine-tuned model into the original model. Requires higher CPU memory (1024 GB for LLaMA-2 70B)
-5. Run `python DPO/train.py`. Further tunes the initial SMART model with DPO. Requires higher GPU memory (192 GB for LLaMA-2 70B)
+5. Run `python DPO/train.py`. Further tunes the SFT model with DPO. Requires higher GPU memory (192 GB for LLaMA-2 70B)
 6. Run `python DPO/merge.py`. Merges the LoRA DPO model into the original model. Requires higher CPU memory (1024 GB for LLaMA-2 70B)
 
 To run inference with our models you can run:
