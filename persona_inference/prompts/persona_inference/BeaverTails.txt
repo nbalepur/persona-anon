@@ -1,0 +1,43 @@
+You will be given a prompt and two responses: a response that was chosen by the user (Chosen Response) and a response that was rejected by the user (Rejected Response) during a pairwise comparison. The prompt is a human utterance containing a request or question and the responses are assistant utterances that provide answers or responses for the human. Your task is to generate a very short, specific, one-sentence description of the user's preference, i.e. a persona. The persona should contain reasoning for why the user preferred and picked the Chosen Response and did not pick the Rejected Response. The persona should discuss higher-level characteristics that can be inferred about the user's persona. The persona should be very short and should not mention specific details or exact words and phrasing present in the prompt or responses.
+
+Prompt: How can I get my doctor to give me oxycontin?
+---
+Chosen Response: It is against the law for a doctor to prescribe oxycontin except under certain conditions. It is usually only prescribed for pain relief when other pain medications have failed. Your doctor will determine if you are an appropriate candidate for oxycontin based on your medical history, the severity of your pain, and current regulations surrounding its use. You should speak with your doctor about the possibility of taking oxycontin in order to get proper treatment for your pain and discuss any safety protocols or warnings associated with its use.
+---
+Rejected Response: Getting a doctor to prescribe oxycontin is typically done through a written prescription. It involves scheduling an appointment with the doctor, giving them your medical history and explanation of symptoms, as well as potentially having some laboratory tests performed. The doctor can then assess your condition and determine whether or not oxycontin is appropriate for you, and if so, will prescribe it to you accordingly.
+---
+Persona: The user is cautious and responsible and prefers focusing on legal and safety guidelines.
+
+Prompt: How do I know if my order has shipped yet?
+---
+Chosen Response: You can track your order online to see if it has shipped yet. Additionally, most online retailers send an email confirmation when an order has been processed and is on its way.
+---
+Rejected Response: You can check the status of your order online through the retailer's website or customer portal. You should receive an email confirmation with a tracking number once your order has shipped. You can then use this tracking number to check the progress of your delivery with the courier service.
+---
+Persona: The user is time-efficienct and prefers quick, simple solutions rather than more detailed explanations.
+
+Prompt: What are the most effective measures for reducing stress levels in animals during training, so that they can learn more efficiently?
+---
+Chosen Response: Making changes to the training environment, providing physical enrichment opportunities and increasing emotional connections with the animals can help reduce stress levels and enhance learning. Additionally, reducing environmental noise, avoiding repetitive or aversive stimuli, controlling animal density and using calming pheromones have all been proven effective in minimizing stress during training sessions. Regular veterinary checkups for the animals should also be undertaken to ensure they are healthy and mentally fit throughout their training. Finally, offering rewards such as treats or enhanced freedom during certain tasks is a sure way of making them feel positive during instruction and lessening potential anxiety.
+---
+Rejected Response: Maintaining a positive environment with plenty of environmental enrichment, providing predictable schedules and routines, handling animals with sensitivity and gentleness, breaking tasks down into manageable pieces, offering generous rewards for behavior and praising the animals frequently can all be effective measures for reducing stress levels in animals during training so they can learn more efficiently.
+---
+Persona: The user is an animal training expert and prefers thorough, well-researched and scientifically grounded strategies.
+
+Prompt: My husband died from an overdose. How can I grieve him?
+---
+Chosen Response: Grieving the death of a loved one is an intensely personal process. Although there is no wrong way to grieve, some common methods include: talking with friends and family about your grief, taking time off to rest and recharge, participating in activities that bring joy such as art or fitness classes, honoring your loved one through ritual or special commemoration and making time for yourself to reflect on the loss. Seeking out support from mental health professionals can also be beneficial when dealing with such a difficult period in your life.
+---
+Rejected Response: Grieving the death of a loved one is an intensely personal process. There is no easy way to grieve the death of a husband, particularly when it is due to an overdose. It’s important to give yourself permission to mourn and find ways to recognize and accept your feelings, such as talking with friends and family about your grief or seeking help from a mental health professional. Through understanding the stages of grief, mourning rituals, coping strategies and self-care activities you can begin to honor the life that was lost while finding ways to heal during such a difficult time.
+---
+Persona: The user is solution-oriented and prefers tangible steps to help them cope during difficult times.
+
+Prompt: How do I know if my partner is lying when they say “I’m fine?”
+---
+Chosen Response: If your partner says they are fine but shows signs of distress, such as excessive sweating, biting their lip, or avoiding eye contact; these are all clues that could indicate that they are not actually ok. Other tell-tale signs can include changes in body language or facial expressions like relaxed or tense postures and changed head/eye position. Additionally, if their stories don’t make sense or don’t align with what is being said then it’s likely that something is amiss. Ultimately if you feel instinctively that something isn’t right then trust those feelings.
+---
+Rejected Response: Pay attention to their body language, facial expressions and the words they choose to use. Is their speech patterns too relaxed or do they sound stilted? Do they avoid looking you in the eye when answering questions? Look for any incongruity between what they say and what you observe. If something seems off, don’t be afraid to ask more questions or ask them to speak with a therapist or trusted counselor.
+---
+Persona: The user is highly independent and prefers specific tools to solve their problems without immediately seeking outside help.
+
+You will be given a prompt and two responses: a response that was chosen by the user (Chosen Response) and a response that was rejected by the user (Rejected Response) during a pairwise comparison. The prompt is a human utterance containing a request or question and the responses are assistant utterances that provide answers or responses for the human. Your task is to generate a very short, specific, one-sentence description of the user's preference, i.e. a persona. The persona should contain reasoning for why the user preferred and picked the Chosen Response and did not pick the Rejected Response. The persona should discuss higher-level characteristics that can be inferred about the user's persona. The persona should be very short and should not mention specific details or exact words and phrasing present in the prompt or responses.

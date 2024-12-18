@@ -1,0 +1,51 @@
+You will be given a prompt, two candidate responses (Response 1 and Response 2), and a user's persona. The prompt is a title of a forum post containing a question and the responses are comments that provide answers for the original poster. The persona is a very short, specific, one-sentence description of a user's preference and contains reasoning for which types of responses the user often picks in pairwise comparisons. Based on the user's persona, your task is to decide which of the two reponses the user would likely choose in a pairwise comparison. Response with just "1" or "2" denoting whether the user would choose Response 1 or Response 2, respectively.
+
+Prompt: How to remove the copyright box on a paper that uses the ACM sig-alternate.cls class file?
+---
+Response 1: I fixed the problem by writing \setcopyright{none} before \begin{document} at the top. FYI I was using overleaf.
+---
+Response 2: In the newest format (e.g. ACM MM 2020), you can set nonacm and authorversion in the documentclass: <code>\documentclass[sigconf,authorversion,nonacm]{acmart} </code> See also the official guide: https://www.acm.org/binaries/content/assets/publications/consolidated-tex-template/acmart.pdf. (April 2020).
+---
+Persona: The user is by-the-book and prefers to follow official, established guidelines when solving technical issues.
+---
+Chosen Response: 2
+
+Prompt: How is it known that everyone with blue eyes has one single ancestor, rather than this mutation occurring in multiple individuals at many different times?
+---
+Response 1: Actually, the mutation did happen multiple times. For example, there is a population on the Solomon Islands who have dark skin but sometimes have blue eyes and blond hair. It is genetically distinct from the European kind, also looks pretty cool.    https://www.livescience.com/20078-gene-mutation-blond-hair.html
+---
+Response 2: While this doesn't answer the question directly (/u/-Metacelsus- did that nicely) I'd like to adress the aspect of "how can a single common ancestor be responsible for *all* the blue eyes in the world?"  That's because we are all related to each other. This video explains the math but essentially, if you go back far enough in history then everyone alive then is either related to everyone alive today or their family line died out completely. And the amazing thing is that you don't have to go that far back in history at all. If you're of European descent then with enough work you're pretty much guaranteed to be able to trace your family lineage back to Charlemange. And that's not because he was some kind of prolific breeder. You are probably related to pretty much everyone from that time (who's family line didn't die out). It's just a whole lot easier to find documents about Charlemagne than some no name farmer out in bumfuck nowhere.  And this is a mere 1300 years ago. According to simulations based on migration patterns and population growths the corresponding generation that is related to everybody alive *in the world* today would be somewhere between 4000-7000 years ago. That is more than enough time for a gene that's considered to be 10k years old to account for every pair of blue eyes in the world today.
+---
+Persona: The user is a fact-based decision-maker and prefers straightforward responses that focus on addressing the core of their question with credible sources without going off-topic.
+---
+Chosen Response: 1
+
+Prompt: Chrome keyboard shortcut to pause script execution <sep> Is there a keyboard shortcut in Google Chrome which will break script execution?
+---
+Response 1: I wrote a quick little Chrome Extension that allows you to press the Pause button on your keyboard to pause javascript execution How to get it: Chrome WebStore Source Code on GitHub CRX File Usage: Keep chrome developer tools open Press <code>pause/break</code> on your keyboard
+---
+Response 2: Google's Keyboard Shortcuts Reference lists for "Pause / resume script execution": F8 or Ctrl+\ (Windows) F8 or Cmd+\ (Mac) There are easier ways to inspect things in odd states like hover or active. First, find the DOM node in the Elements pane of Chrome Dev Tools. Now you can either right-click the node and look at the "Force Element State" in the context menu, or select the node and look in the Styles tab and find the dashed-box-with-mouse-pointer icon in the top right (next to the +/plus icon which lets you add a new CSS rule to <code>element.style</code>, the element you selected). When you activate one of these states, the left margin of the elements pane gets a little circle to indicate that you've overridden the natural state of the element on that line.
+---
+Persona: The user is tech-savvy and prefers using simpler, third-party tools to achieve immediate results without extra complexity in existing tools.
+---
+Chosen Response: 1
+
+Prompt: How to run a method before all tests in all classes?
+---
+Response 1: Using session fixture as suggested by hpk42 is great solution for many cases, but fixture will run only after all tests are collected. Here are two more solutions: conftest hooks Write a <code>pytest_configure</code> or <code>pytest_sessionstart</code> hook in your <code>conftest.py</code> file: <code># content of conftest.py def pytest_configure(config): """ Allows plugins and conftest files to perform initial configuration. This hook is called for every plugin and initial conftest file after command line options have been parsed. """ def pytest_sessionstart(session): """ Called after the Session object has been created and before performing collection and entering the run test loop. """ def pytest_sessionfinish(session, exitstatus): """ Called after whole test run finished, right before returning the exit status to the system. """ def pytest_unconfigure(config): """ called before test process is exited. """ </code> pytest plugin Create a pytest plugin with <code>pytest_configure</code> and <code>pytest_unconfigure</code> hooks. Enable your plugin in <code>conftest.py</code>: <code># content of conftest.py pytest_plugins = [ 'plugins.example_plugin', ] # content of plugins/example_plugin.py def pytest_configure(config): pass def pytest_unconfigure(config): pass </code>
+---
+Response 2: You might want to use a session-scoped "autouse" fixture: <code># content of conftest.py or a tests file (e.g. in your tests or root directory) @pytest.fixture(scope="session", autouse=True) def do_something(request): # prepare something ahead of all tests request.addfinalizer(finalizer_function) </code> This will run ahead of all tests. The finalizer will be called after the last test finished.
+---
+Persona: The user is open-minded and prefers having multiple options to choose from rather than a single, simplified solution.
+---
+Chosen Response: 1
+
+Prompt: If I like] Covers that sound totally different from the original version [what else would I like]?
+---
+Response 1: Changes -Black Sabbath -> Charles Bradley  Is phenomenal
+---
+Response 2: Siouxsie & The Banshees - Strange Fruit  https://m.youtube.com/watch?v=trSvyZ-Wn6I  Billie Holiday - Strange Fruit  https://m.youtube.com/watch?v=Web007rzSOI
+---
+Persona: The user is time-efficient and prefers responses that conveniently provide actionable resources.
+---
+Chosen Response: 2

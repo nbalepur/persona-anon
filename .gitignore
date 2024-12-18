@@ -1,0 +1,6 @@
+persona_inference/results/*
+!persona_inference/results/.gitkeep
+__pycache__/
+wandb/
+*_true
+*_true.sh
