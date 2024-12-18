@@ -1,5 +1,7 @@
 persona_inference/results/*
 !persona_inference/results/.gitkeep
+persona_tailoring/results/*
+!persona_tailoring/results/.gitkeep
 __pycache__/
 wandb/
 *_true

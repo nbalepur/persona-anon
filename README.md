@@ -65,7 +65,7 @@ WANDB_KEY=... # Weights and Biases token
 This section provides the code for **Persona Inference**, which uses LLMs to abductively reason why responses may be preferred in preference datasets. The task is as follows:
 - For prompt $p$ and responses $r_1$ and $r_2$, the LLM gives a persona $\mathcal{P}_1$ such that a user described by $\mathcal{P}_1$ would prefer $r_1$ over $r_2$ 
 
-All persona inference experiments (Sections 2 and 3 in the paper) can be run via `model/run_model.py`. The arguments for this Python code are here:
+All of the code for the Persona Inference experiments (Sections 2 and 3 in the paper) can be found in `/persona-inference/` and run via `model/run_model.py`. The arguments for this Python code are here:
 
 | **Argument**            | **Sample Value**                           | **Description**                                                              |
 |--------------------------|-------------------------------------|------------------------------------------------------------------------------|
@@ -194,7 +194,11 @@ At the top of the script, you will need to specify the model/run name used to in
 
 ## Persona Tailoring
 
-We provide our code for Persona Tailoring below, which can align a much more personalized model by training on LLM personas from Persona Inference. Before training, we recommend filling in `/model/config.py` so most parameters are shared across model runs. Specifically, there are the following arguments:
+We provide our code for Persona Tailoring below, which can align a much more personalized model by training on LLM personas from Persona Inference:
+
+- For prompt $p$ and persona $\mathcal{P}$, the LLM gives response $r$ for $p$ that is tailored to $\mathcal{P}$
+
+All of the code for the Persona Tailoring experiments (Sections 4 and 5 in the paper) can be found in `/persona-tailoring/`. Before running any code, we recommend filling in `/model/config.py` so most parameters are shared across model runs. Specifically, there are the following arguments:
 
 | **Parameter**          | **Sample Value**                          | **Description**                                                     |
 |-------------------------|------------------------------------|---------------------------------------------------------------------|
@@ -266,7 +270,7 @@ bash scripts/judge.sh
 
 We note the following limitations with our approach:
 1. Models have not undergone safety training, so they can produce harmful, biased, or irrelevant text when instructed to
-2. The Anthropic HHH models often generate repetitive text. To fix this, we recommend using strategies apart from greedy decoding. 
+2. The Anthropic HHH models often generate repetitive text. To fix this, we recommend using decoding strategies apart from greedy decoding. 
 
 ## Contact
 
