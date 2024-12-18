@@ -2,6 +2,8 @@
 
 This is the official repository of "Whose Boat Does it Float? Improving Personalization in Preference Tuning via Inferred User Personas", which can be viewed [here](https://drive.google.com/file/d/1-EKjuwFZ_5MJ1ZlMfo9gXiuTu-s0pQd8/view)
 
+<img width="1329" alt="persona_main" src="https://github.com/user-attachments/assets/5bc7aaff-e6c3-4f4a-b967-e017f8ea8613" />
+
 ## Abstract
 
 LLMs are tuned to follow instructions (aligned) by learning which of two outputs users prefer for a prompt. However, this preference data format does not convey *why* users prefer responses that are chosen or rejected, so LLMs trained on these datasets cannot tailor responses to varied user needs. To surface these parameters of personalization, we apply **abductive reasoning** to preference data, inferring needs and interests of users, i.e. personas, that may prefer each output.
