@@ -90,12 +90,6 @@ INSTRUCTION_MAP = {
     'Mnemonic': 'Please provide a keyword mnemonic to the following vocabulary term.',
 }
 
-PERSONA_MAP = {
-    'BeaverTails': 'Please provide a response that aligns with the attributes of the following persona.',
-    'Anthropic HHH': 'Please provide a response that aligns with the attributes of the following persona.',
-    'Mnemonic': 'Please provide a response that aligns with the attributes of the following persona.'
-}
-
 def main(args):
 
     persona_base_config = Persona(
@@ -123,7 +117,7 @@ def main(args):
     quality_rubric = "Is the response high-quality?"
     for idx in range(len(p_base)):
         for A, B, is_swapped in [(r_base[idx], r_test[idx], False), (r_test[idx], r_base[idx], True)]:
-            quality_instr.append(INSTRUCTION_MAP[dataset_name] + ' Prompt: ' + p_test[idx])
+            quality_instr.append(INSTRUCTION_MAP[dataset_name] + ' Prompt: ' + p_base[idx])
             quality_res_a.append(A.replace('Prompt:', '').replace('<|end_of_text|>', '').strip())
             quality_res_b.append(B.replace('Prompt:', '').replace('<|end_of_text|>', '').strip())
             quality_is_swapped.append(is_swapped)
@@ -132,7 +126,7 @@ def main(args):
     persona_rubric = "Does the response answer the prompt and align with the user's specified persona?"
     for idx in range(len(p_base)):
         for A, B, is_swapped in [(r_base[idx], r_test[idx], False), (r_test[idx], r_base[idx], True)]:
-            persona_instr.append(PERSONA_MAP[dataset_name] + ' Prompt: ' + p_test[idx] + ' Persona: ' + persona_test[idx])
+            persona_instr.append(INSTRUCTION_MAP[dataset_name] + ' Prompt: ' + p_base[idx] + ' Persona: ' + persona_test[idx])
             persona_res_a.append(A.replace('Prompt:', '').replace('<|end_of_text|>', '').strip())
             persona_res_b.append(B.replace('Prompt:', '').replace('<|end_of_text|>', '').strip())
             persona_is_swapped.append(is_swapped)
