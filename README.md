@@ -22,6 +22,8 @@ This is the official repository of "Whose Boat Does it Float? Improving Personal
 - [Known Limitations](#known-limitations)
 - [Contact](#contact)
 
+<img width="1329" alt="persona_main" src="https://github.com/user-attachments/assets/5bc7aaff-e6c3-4f4a-b967-e017f8ea8613" />
+
 ## Abstract
 
 LLMs are tuned to follow instructions (aligned) by learning which of two outputs users prefer for a prompt. However, this preference data format does not convey *why* users prefer responses that are chosen or rejected, so LLMs trained on these datasets cannot tailor responses to varied user needs. To surface these parameters of personalization, we apply **abductive reasoning** to preference data, inferring needs and interests of users, i.e., personas, that may prefer each output.
@@ -292,4 +294,8 @@ We note the following limitations with our approach:
 
 ## Contact
 
+<<<<<<< HEAD
 If you have any questions about the paper or repository, feel free to raise an issue or contact me, Nishant Balepur, at [nbalepur@umd.edu](mailto:nbalepur@umd.edu).
+=======
+If you have any questions about the paper or repository, feel free to raise an issue or contact me, Nishant Balepur, at [nbalepur@umd.edu](mailto:nbalepur@umd.edu)
+>>>>>>> 59b502e62fe3ad0ae2ff3861df33bd7c702531ba
