@@ -1,4 +1,4 @@
-# Personalized Preference Tuning
+# Alignment Personalization
 
 This is the official repository of "Whose Boat Does it Float? Improving Personalization in Preference Tuning via Inferred User Personas", which can be viewed [here](https://drive.google.com/file/d/1-EKjuwFZ_5MJ1ZlMfo9gXiuTu-s0pQd8/view).
 
@@ -22,7 +22,6 @@ This is the official repository of "Whose Boat Does it Float? Improving Personal
 - [Known Limitations](#known-limitations)
 - [Contact](#contact)
 
-<img width="1329" alt="persona_main" src="https://github.com/user-attachments/assets/5bc7aaff-e6c3-4f4a-b967-e017f8ea8613" />
 
 ## Abstract
 
