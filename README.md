@@ -85,7 +85,7 @@ Follow these steps to set up the environment:
 ## Persona Inference
 
 This section provides the code for **Persona Inference**, which uses LLMs to abductively reason why responses may be preferred in preference datasets. The task is as follows:
-- For prompt \(p\) and responses \(r_1\) and \(r_2\), the LLM gives a persona \(\mathcal{P}_1\) such that a user described by \(\mathcal{P}_1\) would prefer \(r_1\) over \(r_2\).
+- For prompt $p$ and responses $r_1$ and $r_2$, the LLM gives a persona $\mathcal{P}_1\$ such that a user described by $\mathcal{P}_1$ would prefer $r_1$ over $r_2$.
 
 The code for the Persona Inference experiments (Sections 2 and 3 in the paper) is located in `/persona-inference/` and can be run via `model/run_model.py`. The arguments for this Python code are detailed in the following table:
 
@@ -217,7 +217,7 @@ At the top of the script, you will need to specify the model/run name used to in
 
 We provide our code for Persona Tailoring below, which can align a much more personalized model by training on LLM personas from Persona Inference:
 
-- For prompt \(p\) and persona \(\mathcal{P}\), the LLM gives response \(r\) for \(p\) that is tailored to \(\mathcal{P}\).
+- For prompt $p$ and persona $\mathcal{P}$, the LLM gives response $r$ for $p$ that is tailored to $\mathcal{P}$.
 
 All of the code for the Persona Tailoring experiments (Sections 4 and 5 in the paper) can be found in `/persona-tailoring/`. Before running any code, we recommend filling in `/model/config.py` so most parameters are shared across model runs. Specifically, there are the following arguments:
 
@@ -294,8 +294,4 @@ We note the following limitations with our approach:
 
 ## Contact
 
-<<<<<<< HEAD
-If you have any questions about the paper or repository, feel free to raise an issue or contact me, Nishant Balepur, at [nbalepur@umd.edu](mailto:nbalepur@umd.edu).
-=======
 If you have any questions about the paper or repository, feel free to raise an issue or contact me, Nishant Balepur, at [nbalepur@umd.edu](mailto:nbalepur@umd.edu)
->>>>>>> 59b502e62fe3ad0ae2ff3861df33bd7c702531ba
