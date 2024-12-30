@@ -179,8 +179,7 @@ def main(args):
 
     # load model
     model_factory = ModelFactory()
-    #model = model_factory.get_model(args)
-    model = OpenAI('gpt-4o-2024-11-20', args.temperature, args.max_tokens, args.stop_token, args.open_ai_token)
+    model = model_factory.get_model(args)
 
     # load checkpoints
     checkpoint_loader = Checkpoint(args)
