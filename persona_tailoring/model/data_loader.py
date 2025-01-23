@@ -1,6 +1,6 @@
 import datasets
 from model import config
-from model.util import TrainingType
+from model.util import TrainingType, Persona
 
 class DataLoader:
     """A class to manage loading and preparing datasets."""
@@ -29,7 +29,7 @@ class DataLoader:
         """Retrieve the system persona for the dataset."""
         return self.system_persona_map.get(self.dataset_split, "")
     
-    def load_few_shot_data(self, persona):
+    def load_few_shot_data(self, persona: Persona):
         """Load few-shot training and test data."""
         system_persona = self._get_system_persona()
         train_response_type = persona.training_type
@@ -58,7 +58,7 @@ class DataLoader:
         
         return datasets.Dataset.from_dict(train_data), datasets.Dataset.from_dict(test_data)
     
-    def load_sft_data(self, training_type):
+    def load_sft_data(self, training_type: TrainingType):
         """Load data for supervised fine-tuning (SFT)."""
         response_type = training_type
         ds_train = self.dataset['sft_train']
@@ -77,7 +77,7 @@ class DataLoader:
         
         return datasets.Dataset.from_dict(train_data), datasets.Dataset.from_dict(val_data)
     
-    def load_dpo_data(self, training_type):
+    def load_dpo_data(self, training_type: TrainingType):
         """Load data for direct preference optimization (DPO)."""
         response_type = training_type
         ds_train = self.dataset['dpo_train']
@@ -99,7 +99,7 @@ class DataLoader:
         return datasets.Dataset.from_dict(train_data), datasets.Dataset.from_dict(val_data)
 
 
-    def load_test_data(self, persona):
+    def load_test_data(self, persona: Persona):
         """Load test data for evaluation."""
         system_persona = self._get_system_persona()
         inference_persona_source, inference_response_type = persona.inference_type.value.split('-')[0], 'rejected' if 'rejected' in persona.inference_type.value else 'chosen'

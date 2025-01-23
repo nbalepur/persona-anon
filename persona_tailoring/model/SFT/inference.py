@@ -28,7 +28,7 @@ def parse_args():
     )
     return parser.parse_args()
 
-def setup_model_and_tokenizer(persona, cache_dir):
+def setup_model_and_tokenizer(persona: Persona, cache_dir: str):
     """Load the model and tokenizer for the specified persona."""
     sft_model_name = f"{config.params['sft_final_output_dir']}_{persona.training_type.value}"
     tokenizer_name = config.params['sft_tokenizer_name']
@@ -101,7 +101,8 @@ def main(args):
 
     # Load test data and apply template
     dl = DataLoader(config.params['dataset_name'])
-    ds_test = dl.load_test_data(persona).map(fetch_testing_template(training_type=args.training_type, dataset_split=config.params['dataset_name']), batched=True)
+    test_prompt_template = fetch_testing_template(training_type=args.training_type, dataset_split=config.params['dataset_name'])
+    ds_test = dl.load_test_data(persona).map(test_prompt_template, batched=True)
     inf_prompts = ds_test['prompt']
 
     # Ensure output directory exists

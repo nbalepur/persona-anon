@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from enums import PromptType
+from typing import Any
 
 # Abstract base class for implementing prompts
 class Prompt(ABC):
@@ -46,7 +47,7 @@ class PersonaPreference(Prompt):
 
 class PromptFactory:
 
-    def __init__(self, args, prompt_type):
+    def __init__(self, args: Any, prompt_type: PromptType):
 
         ds_name_parsed = args.inference_split
         self.prompt_dir = f'{args.prompt_dir}{prompt_type.value}/{ds_name_parsed}.txt'
@@ -58,7 +59,7 @@ class PromptFactory:
             PromptType.persona_prefs: PersonaPreference(self.prompt_dir),
         }
         
-    def get_prompt(self, prompt_type):
+    def get_prompt(self, prompt_type) -> Prompt:
         if prompt_type in self.prompt_type_map:
             return self.prompt_type_map[prompt_type]
         else:

@@ -59,8 +59,10 @@ def main(args):
 
     # Load train and test data
     train, test = dl.load_few_shot_data(persona)
-    train = train.map(fetch_training_template(training_type=persona.training_type, add_eot=False, add_response=True), batched=True)
-    test = test.map(fetch_testing_template(training_type=persona.training_type, dataset_split=dataset_split), batched=True)
+    train_prompt_template = fetch_training_template(training_type=persona.training_type, add_eot=False, add_response=True)
+    test_prompt_template = fetch_testing_template(training_type=persona.training_type, dataset_split=dataset_split)
+    train = train.map(train_prompt_template, batched=True)
+    test = test.map(test_prompt_template, batched=True)
 
     # Generate inference prompts
     base_prompt = '\n\n'.join(train['prompt'])

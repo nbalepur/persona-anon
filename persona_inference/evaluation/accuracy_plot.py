@@ -4,9 +4,10 @@ datasets = ['BeaverTails'] # which datasets?
 
 # use this to rename models/datasets (optional)
 MODEL_MAP = {
+    'gpt-4o-mini': 'GPT-4o Mini',
 }
-
 DATASET_MAP = {
+    'BeaverTails': 'Beaver Tails' 
 }
 
 import pandas as pd
@@ -15,7 +16,8 @@ import numpy as np
 
 acc_data = {'evalutor_model': [], 'Model': [], 'correct': [], 'Response Type': [], 'dataset': [], 'prompt': [], 'prediction': []}
 
-def ae(pred, true):
+def ae(pred: str, true: str) -> int:
+    """Answer equivalence -> return a score for if the two judgments are the same"""
     if '1' in pred and '1' in true and '2' not in pred and '2' not in true:
         return 1
     if '2' in pred and '2' in true and '1' not in pred and '1' not in true:
@@ -51,7 +53,7 @@ for m in evaluator_models:
             acc_data['Response Type'].append('Chosen Response' if l['is_chosen'] else 'Rejected Response')
             acc_data['evalutor_model'].append(MODEL_MAP.get(m, m))
             acc_data['Model'].append(MODEL_MAP.get(l['model_name'], l['model_name']))
-            acc_data['correct'].append(ae(p['raw_text'].strip(), str(l['label'])))
+            acc_data['correct'].append(ae(pred=p['raw_text'].strip(), true=str(l['label'])))
             acc_data['prompt'].append(p['prompt'])
             acc_data['prediction'].append(p['raw_text'])
 

@@ -62,13 +62,13 @@ Follow these steps to set up the environment:
 
 1. Create a Conda environment:
    ```bash
-   conda create -n "persona" --python=3.11.0
+   conda create -n "persona" python=3.11.0
    conda activate persona
    ```
 
 2. Install the required dependencies:
    ```bash
-   python pip install -r requirements.txt
+   pip install -r requirements.txt
    ```
 
 3. Fill in the API keys in `.env` depending on which functionality of the repository you want to use:

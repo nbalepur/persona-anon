@@ -53,8 +53,9 @@ def main(args):
     dl = DataLoader(config.params['dataset_name'])
     ds_dpo_train, ds_dpo_eval = dl.load_dpo_data(TrainingType(args.training_type))
 
-    ds_dpo_train = ds_dpo_train.map(fetch_training_template(training_type=TrainingType(args.training_type), add_eot=False, add_response=False), batched=True).select_columns(['prompt', 'chosen', 'rejected'])
-    ds_dpo_eval = ds_dpo_eval.map(fetch_training_template(training_type=TrainingType(args.training_type), add_eot=False, add_response=False), batched=True).select_columns(['prompt', 'chosen', 'rejected'])
+    prompt_training_template = fetch_training_template(training_type=TrainingType(args.training_type), add_eot=False, add_response=False)
+    ds_dpo_train = ds_dpo_train.map(prompt_training_template, batched=True).select_columns(['prompt', 'chosen', 'rejected'])
+    ds_dpo_eval = ds_dpo_eval.map(prompt_training_template, batched=True).select_columns(['prompt', 'chosen', 'rejected'])
 
     # Configure DPO Training
     peft_config = LoraConfig(
@@ -66,8 +67,7 @@ def main(args):
     )
 
     training_args = DPOConfig(
-        #num_train_epochs=10,
-        num_train_epochs=1,
+        num_train_epochs=10,
         overwrite_output_dir=True,
         output_dir=f"{config.params['dpo_output_dir']}_{args.training_type}",
         metric_for_best_model="eval_loss",

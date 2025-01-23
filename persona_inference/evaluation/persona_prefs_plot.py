@@ -5,48 +5,43 @@ datasets = ['BeaverTails'] # name of the datasets
 
 # use this to rename models/datasets (optional)
 MODEL_MAP = {
+    'gpt-4o-mini': 'GPT-4o Mini',
 }
-
 DATASET_MAP = {
+    'BeaverTails': 'Beaver Tails' 
 }
 
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.patches as mpatches
+from typing import Any, List
+import json
+import re
 
 acc_data = {'evalutor_model': [], 'Model': [], 'correct': [], 'Response Type': [], 'dataset': []}
 
-def ae(pred, true):
-    if '1' in pred and '1' in true and '2' not in pred and '2' not in true:
-        return 1
-    if '2' in pred and '2' in true and '1' not in pred and '1' not in true:
-        return 1    
-    return 0
-
-def clf(o):
-    if type(o) != type(''):
+def clf(output: Any) -> int:
+    """Parse the model's classification response"""
+    if type(output) != type(''):
         return -1
-    if "1" in o and "2" not in o:
+    if "1" in output and "2" not in output:
         return 1
-    if "2" in o and "1" not in o:
+    if "2" in output and "1" not in output:
         return 2
     return -1
 
-def clf_pref(arr):
-    if arr[0] + arr[1] != 3:
+def clf_pref(judgments: List[int]) -> str:
+    """Return which persona the model believed was better"""
+    if judgments[0] + judgments[1] != 3:
         return 'Tie'
-    return 'Chosen Persona' if arr[0] == 1 else 'Rejected Persona'
+    return 'Chosen Persona' if judgments[0] == 1 else 'Rejected Persona'
 
 custom_palette = {"Tie": "blue", "Chosen Persona": "green", "Rejected Persona": "red"}
-
-import json
-import re
 
 pref_persona_ds = {'model': [], 'dataset': [], 'preference': []}
 
 for m in evaluator_models:
-
     for ds in datasets:
 
         f = f'results/{m}/{ds}/{run_name}/persona_prefs.jsonl'
@@ -56,7 +51,7 @@ for m in evaluator_models:
         pref_persona_dict = dict()
         for l in json_no_persona:
             l = json.loads(l)
-            label = clf(l['raw_text'])
+            label = clf(output=l['raw_text'])
 
             persona_regex = r"Persona 1: (.+?)\n---\nPersona 2: (.+?)\n---\nBetter Persona:"
             match = re.search(persona_regex, l['prompt'])
@@ -69,7 +64,8 @@ for m in evaluator_models:
                 arr = pref_persona_dict.get(personas_key, [])
                 arr.append(label)
                 pref_persona_dict[personas_key] = arr
-        pref_persona_dict = {k: clf_pref(v) for k, v in pref_persona_dict.items() if len(v) == 2 and -1 not in v}
+
+        pref_persona_dict = {k: clf_pref(judgments=v) for k, v in pref_persona_dict.items() if len(v) == 2 and -1 not in v}
 
         for v in pref_persona_dict.values():
             pref_persona_ds['model'].append(MODEL_MAP.get(m, m))

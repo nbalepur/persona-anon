@@ -64,8 +64,9 @@ def main(args):
     )
 
     # Apply persona-based prompts
-    ds_sft_train = ds_sft_train.map(fetch_training_template(training_type=TrainingType(args.training_type), add_eot=True, add_response=True), batched=True)
-    ds_sft_eval = ds_sft_eval.map(fetch_training_template(training_type=TrainingType(args.training_type), add_eot=True, add_response=True), batched=True)
+    train_prompt_template = fetch_training_template(training_type=TrainingType(args.training_type), add_eot=True, add_response=True)
+    ds_sft_train = ds_sft_train.map(train_prompt_template, batched=True)
+    ds_sft_eval = ds_sft_eval.map(train_prompt_template, batched=True)
 
     # Configure SFT Training
     sft_config = SFTConfig(

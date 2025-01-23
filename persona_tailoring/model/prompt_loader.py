@@ -1,125 +1,48 @@
 
 from model.util import TrainingType
 
-def create_exemplar_train_with_persona_eot(ex):
-    """Create exemplars for training data with personas."""
-    return {
-        'prompt': [
-            f"""Prompt: {ex['prompt'][idx]}
-Persona: {ex['persona'][idx]}
-Response: {ex['response'][idx]}<|end_of_text|>""" 
-            for idx in range(len(ex['prompt']))
-        ]
-    }
+def create_exemplars(ex, use_persona: bool, add_eot: bool, add_response: bool, is_mnemonic: bool, is_train: bool):
+    """Create exemplars for the prompt template"""
+    prompts = []
+    for idx in range(len(ex['prompt'])):
 
-def create_exemplar_train_no_persona_eot(ex):
-    """Create exemplars for training data without personas."""
-    return {
-        'prompt': [
-            f"""Prompt: {ex['prompt'][idx]}
-Response: {ex['response'][idx]}<|end_of_text|>""" 
-            for idx in range(len(ex['prompt']))
-        ]
-    }
+         # included in every prompt
+        prompt = f"Prompt: {ex['prompt'][idx]}"
+        if use_persona:
+            prompt += f"\nPersona: {ex['persona'][idx]}"
+        prompt += "\nResponse:"
 
-def create_exemplar_train_with_persona_nores(ex):
-    """Create exemplars for training data with personas."""
-    return {
-        'prompt': [
-            f"""Prompt: {ex['prompt'][idx]}
-Persona: {ex['persona'][idx]}
-Response:""" 
-            for idx in range(len(ex['prompt']))
-        ]
-    }
+        if is_train:
+            if add_response: # DPO doesn't need a response
+                prompt += f" {ex['response'][idx]}"
+            if add_eot: # SFT needs a forced EOT token
+                prompt += "<|end_of_text|>"
+        else:
+            # if we're in inference and on the mnemonic dataset, add the special decoding prefix
+            if is_mnemonic:
+                prompt += f" {ex['prompt'][idx].title()} sounds like"
 
-def create_exemplar_train_no_persona_nores(ex):
-    """Create exemplars for training data without personas."""
-    return {
-        'prompt': [
-            f"""Prompt: {ex['prompt'][idx]}
-Response:""" 
-            for idx in range(len(ex['prompt']))
-        ]
-    }
+        prompts.append(prompt)
+    return {'prompt': prompts}
 
-def create_exemplar_train_with_persona(ex):
-    """Create exemplars for training data with personas."""
-    return {
-        'prompt': [
-            f"""Prompt: {ex['prompt'][idx]}
-Persona: {ex['persona'][idx]}
-Response: {ex['response'][idx]}""" 
-            for idx in range(len(ex['prompt']))
-        ]
-    }
+def fetch_training_template(training_type: TrainingType, add_eot: bool, add_response: bool):
+    """Fetch the right prompt template for training. DPO doesn't need the response, but SFT and Few-Shot do. SFT needs an end-of-text token to enforce termination, but the others do not"""
+    return lambda ex: create_exemplars(
+        ex=ex,
+        use_persona=(training_type != TrainingType.none),
+        add_eot=add_eot,
+        add_response=add_response,
+        is_mnemonic=False,
+        is_train=True,
+    )
 
-def create_exemplar_train_no_persona(ex):
-    """Create exemplars for training data without personas."""
-    return {
-        'prompt': [
-            f"""Prompt: {ex['prompt'][idx]}
-Response: {ex['response'][idx]}""" 
-            for idx in range(len(ex['prompt']))
-        ]
-    }
-
-def create_exemplar_test_with_persona(ex):
-    """Create exemplars for test data with personas."""
-    response_prefix = ["Response:" for _ in range(len(ex['prompt']))]
-    return {
-        'prompt': [
-            f"""Prompt: {ex['prompt'][idx]}
-Persona: {ex['persona'][idx]}
-{response_prefix[idx]}""" 
-            for idx in range(len(ex['prompt']))
-        ]
-    }
-
-def create_exemplar_test_with_persona_mnemonic(ex):
-    """Create exemplars for test data with personas."""
-    response_prefix = [f"Response: {ex['prompt'][idx].title()} sounds like" for idx in range(len(ex['prompt']))]
-    return {
-        'prompt': [
-            f"""Prompt: {ex['prompt'][idx]}
-Persona: {ex['persona'][idx]}
-{response_prefix[idx]}""" 
-            for idx in range(len(ex['prompt']))
-        ]
-    }
-
-def create_exemplar_test_no_persona(ex):
-    """Create exemplars for test data without personas."""
-    response_prefix = ["Response:" for _ in range(len(ex['prompt']))]
-    return {
-        'prompt': [
-            f"""Prompt: {ex['prompt'][idx]}{ex['persona'][idx].replace('The user is', ' I am')}
-{response_prefix[idx]}""" 
-            for idx in range(len(ex['prompt']))
-        ]
-    }
-
-def create_exemplar_test_no_persona_mnemonic(ex):
-    """Create exemplars for test data without personas."""
-    response_prefix = [f"Response: {ex['prompt'][idx].title()} sounds like" for idx in range(len(ex['prompt']))]
-    return {
-        'prompt': [
-            f"""Prompt: {ex['prompt'][idx]} {ex['persona'][idx].replace('The user is', 'I am')}
-{response_prefix[idx]}""" 
-            for idx in range(len(ex['prompt']))
-        ]
-    }
-
-def fetch_training_template(training_type, add_eot, add_response):
-    if not add_response:
-        return create_exemplar_train_no_persona_nores if training_type == TrainingType.none else create_exemplar_train_with_persona_nores
-    if add_eot:
-        return create_exemplar_train_no_persona_eot if training_type == TrainingType.none else create_exemplar_train_with_persona_eot
-    else:
-        return create_exemplar_train_no_persona if training_type == TrainingType.none else create_exemplar_train_with_persona
-
-def fetch_testing_template(training_type, dataset_split):
-    if training_type == TrainingType.none:
-        return create_exemplar_test_no_persona_mnemonic if dataset_split == 'Mnemonic' else create_exemplar_test_no_persona
-    else:
-        return create_exemplar_test_with_persona_mnemonic if dataset_split == 'Mnemonic' else create_exemplar_test_with_persona
+def fetch_testing_template(training_type: TrainingType, dataset_split: str):
+    """Fetch the right prompt template for inference"""
+    return lambda ex: create_exemplars(
+        ex=ex,
+        use_persona=(training_type != TrainingType.none),
+        add_eot=False,
+        add_response=True,
+        is_mnemonic=(dataset_split == 'Mnemonic'),
+        is_train=False,
+    )

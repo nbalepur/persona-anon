@@ -1,5 +1,7 @@
 import json
 import os
+from enums import PromptType
+from typing import Tuple, List, Any
 
 class Checkpoint:
 
@@ -10,7 +12,8 @@ class Checkpoint:
         self.run_name = args.run_name
         self.split_name = args.inference_split
 
-    def setup_partition(self, dataset_size):
+    def setup_partition(self, dataset_size: int) -> Tuple[int, int]:
+        """Get the starting + ending points of the partition"""
 
         partition_map = {'full': (0, dataset_size),
         'first_half': (0, int(0.5 * dataset_size)),
@@ -37,7 +40,8 @@ class Checkpoint:
 
         return self.start, self.end
 
-    def set_directories(self, pt):
+    def set_directories(self, pt: PromptType):
+        """Set up the final and temporary save directories"""
 
         if self.partition == 'full':
             final_res_dir = f'{self.results_dir}/{self.split_name}/{self.run_name}/{pt.value}.jsonl'
@@ -49,7 +53,9 @@ class Checkpoint:
         self.final_res_dir = final_res_dir
         self.final_res_dir_temp = final_res_dir_temp
 
-    def load_checkpoint(self):
+    def load_checkpoint(self) -> List[Any]:
+        """Load the list of outputs currently seen"""
+
         if os.path.exists(self.final_res_dir):
             outputs = []
             with open(self.final_res_dir, 'r') as handle:
@@ -66,7 +72,9 @@ class Checkpoint:
                 outputs.append(json.loads(line.strip()))
         return outputs
 
-    def save_checkpoint(self, outputs, is_final):
+    def save_checkpoint(self, outputs: List[Any], is_final: bool):
+        """Save the checkpoint for the current outputs"""
+
         out_dir = self.final_res_dir if is_final else self.final_res_dir_temp
         folder_path = '/'.join(out_dir.split('/')[:-1])
 

@@ -7,7 +7,7 @@ dataset_name="" # original dataset
 run_name="default" # run name of personas
 model="gpt-4o-mini" # model that generated personas
 inference_split="BeaverTails" # inference split used to create personas
-new_dataset_name="" # new name of the dataset
+new_dataset_name="BeaverTails_with_Persona" # new name of the dataset
 
 # API tokens
 if [ -f ../.env ]; then
@@ -21,4 +21,5 @@ python3 model/build_augmented_dataset.py \
 --dataset_name="$dataset_name" \
 --inference_split="$inference_split" \
 --new_dataset_name="$new_dataset_name" \
---hf_write_token="$hf_write_token"
+--hf_write_token="$hf_write_token" \
+--push_to_hub

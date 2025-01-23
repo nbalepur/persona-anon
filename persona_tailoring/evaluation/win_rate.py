@@ -74,6 +74,8 @@ def main(args):
     with open(eval_dir, "r") as f:
         all_metric_data = json.load(f)
     
+    delta_pq_data = dict()
+
     # iterate through both scores
     for metric_name, metric_data in all_metric_data.items():
         metric_map = dict()
@@ -82,11 +84,13 @@ def main(args):
         is_swapped = metric_data['is_swapped']
         winner = metric_data['winner']
 
+        # get distribution of winners
         for prompt, swap, win in zip(instr, is_swapped, winner):
             arr = metric_map.get(prompt, [])
             arr.append(win if not swap else ('A' if win == 'B' else 'B'))
             metric_map[prompt] = arr
 
+        # figure out winner from distribution
         all_winners = []
         for _, winners in metric_map.items():
             if set(winners) == {'A', 'B'}:
@@ -97,10 +101,16 @@ def main(args):
         print()
         print(f"Metric: {metric_name.title().replace('_', ' ')}")
         for label in ['A', 'Tie', 'B']:
-            acc = float(sum([l == label for l in all_winners])) / len(all_winners)
-            print(f'{label}: {acc}')
+            prop = float(sum([l == label for l in all_winners])) / len(all_winners)
+            delta_pq_data[(metric_name, label)] = prop
+            print(f'{label}: {prop}')
         print()
 
+    print()
+    p_win_rate = delta_pq_data[('personalization', 'B')] / (delta_pq_data[('personalization', 'A')] + delta_pq_data[('personalization', 'B')])
+    q_win_rate = delta_pq_data[('response_quality', 'B')] / (delta_pq_data[('response_quality', 'A')] + delta_pq_data[('response_quality', 'B')])
+    delta_pq = 0.5 * (((p_win_rate - 0.5) / 0.5) + ((q_win_rate - 0.5) / 0.5))
+    print("Delta PQ:", delta_pq)
 
 if __name__ == '__main__':
     args = parse_args()

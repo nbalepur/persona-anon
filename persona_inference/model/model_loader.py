@@ -2,8 +2,11 @@ from abc import ABC, abstractmethod
 from enums import ModelType
 import time
 import openai
-# import anthropic
-# import cohere
+import anthropic
+import cohere
+import torch
+from transformers import AutoTokenizer, pipeline
+from huggingface_hub import HfFolder
 
 # Abstract base class for implementing zero-shot prompts
 class LLM(ABC):
@@ -18,7 +21,7 @@ class LLM(ABC):
 
 class HuggingFaceChatModel(LLM):
 
-    def __init__(self, hf_model_name, temp, min_length, max_length, load_in_4bit, load_in_8bit, device_map, cache_dir, hf_token):
+    def __init__(self, hf_model_name: str, temp: float, min_length: int, max_length: int, load_in_4bit: bool, load_in_8bit: bool, device_map: str, cache_dir: str, hf_token: str):
 
         self.temp = temp
         self.min_length = min_length
@@ -27,7 +30,7 @@ class HuggingFaceChatModel(LLM):
         HfFolder.save_token(hf_token)
 
         # load tokenizer
-        tokenizer = AutoTokenizer.from_pretrained(hf_model_name, cache_dir = cache_dir)
+        tokenizer = AutoTokenizer.from_pretrained(hf_model_name, cache_dir=cache_dir)
         dtype = {
             "bf16": torch.bfloat16,
             "fp32": torch.float32,
@@ -47,7 +50,7 @@ class HuggingFaceChatModel(LLM):
         self.pipe = pipe
         self.tokenizer = tokenizer
 
-    def generate_text(self, prompt):
+    def generate_text(self, prompt: str) -> str | None:
 
         messages = [{"role": "user", "content": prompt}]
 
@@ -67,7 +70,7 @@ class HuggingFaceChatModel(LLM):
 
 class OpenAI(LLM):
 
-    def __init__(self, openai_model_name, temp, max_length, stop_token, openai_token):
+    def __init__(self, openai_model_name: str, temp: float, max_length: int, stop_token: str, openai_token: str):
 
         self.temp = temp
         self.openai_model_name = openai_model_name
@@ -75,7 +78,7 @@ class OpenAI(LLM):
         self.stop_token = stop_token
         self.openai_token = openai_token
 
-    def generate_text_helper(self, prompt, num_sec=0, max_retries=5):
+    def generate_text_helper(self, prompt: str, num_sec=0, max_retries=5) -> str | None:
 
         if num_sec == max_retries:
             print("MAX RETRIES EXCEDED")
@@ -98,13 +101,13 @@ class OpenAI(LLM):
         except Exception as e:
             return self.generate_text_helper(prompt, num_sec=num_sec+1, max_retries=max_retries)
 
-    def generate_text(self, prompt):
+    def generate_text(self, prompt) -> str | None:
         
         return self.generate_text_helper(prompt, num_sec=0, max_retries=3)
 
 class Cohere(LLM):
 
-    def __init__(self, cohere_model_name, temp, max_length, stop_token, cohere_token):
+    def __init__(self, cohere_model_name: str, temp: float, max_length: int, stop_token: str, cohere_token: str):
 
         self.temp = temp
         self.cohere_model_name = cohere_model_name
@@ -185,16 +188,16 @@ class ModelFactory:
     @staticmethod
     def get_model(args):
         if args.model_type[0] == ModelType.hf_chat:
-            return HuggingFaceChatModel(args.model_name, args.temperature, args.min_tokens, args.max_tokens, args.load_in_4bit, args.load_in_8bit, args.device_map, args.cache_dir, args.hf_token)
+            return HuggingFaceChatModel(hf_model_name=args.model_name, temp=args.temperature, min_length=args.min_tokens, max_length=args.max_tokens, load_in_4bit=args.load_in_4bit, load_in_8bit=args.load_in_8bit, device_map=args.device_map, cache_dir=args.cache_dir, hf_token=args.hf_token)
         
         if args.model_type[0] == ModelType.open_ai:
-            return OpenAI(args.model_name, args.temperature, args.max_tokens, args.stop_token, args.open_ai_token)
+            return OpenAI(openai_model_name=args.model_name, temp=args.temperature, max_length=args.max_tokens, stop_token=args.stop_token, openai_token=args.open_ai_token)
 
         if args.model_type[0] == ModelType.cohere:
-            return Cohere(args.model_name, args.temperature, args.max_tokens, args.stop_token, args.cohere_token)
+            return Cohere(cohere_model_name=args.model_name, temp=args.temperature, max_length=args.max_tokens, stop_token=args.stop_token, cohere_token=args.cohere_token)
 
         if args.model_type[0] == ModelType.anthropic:
-            return Anthropic(args.model_name, args.temperature, args.max_tokens, args.stop_token, args.anthropic_token)
+            return Anthropic(model_name=args.model_name, temp=args.temperature, max_length=args.max_tokens, stop_token=args.stop_token, anthropic_token=args.anthropic_token)
 
         else:
             raise ValueError(f"Unsupported Model type: {args.model_type[0]}")

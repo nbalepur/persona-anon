@@ -190,10 +190,10 @@ def main(args):
     for pt in args.prompt_types[0]:
 
         # set output directories
-        checkpoint_loader.set_directories(pt) 
+        checkpoint_loader.set_directories(pt=pt) 
 
         # get prompts and dataset size
-        prompts = prompt_collator.get_prompts(pt, checkpoint_loader)
+        prompts = prompt_collator.get_prompts(prompt_type=pt, checkpoint_loader=checkpoint_loader)
         
         # set up inference bounds
         start, end = checkpoint_loader.setup_partition(len(prompts))
@@ -204,12 +204,12 @@ def main(args):
         
         for idx in tqdm.tqdm(range(start, end)):
             prompt = prompts[idx]
-            out_text = model.generate_text(prompt)
+            out_text = model.generate_text(prompt=prompt)
             outputs.append({'raw_text': out_text, 'prompt': 'Prompt:' + prompt.split('\n\nPrompt:')[-1]})
-            checkpoint_loader.save_checkpoint(outputs, False)
+            checkpoint_loader.save_checkpoint(outputs=outputs, is_final=False)
 
         # final save
-        checkpoint_loader.save_checkpoint(outputs, True)
+        checkpoint_loader.save_checkpoint(outputs=outputs, is_final=True)
 
 if __name__ == '__main__':
     args = setup()

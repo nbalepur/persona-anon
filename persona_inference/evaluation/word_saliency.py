@@ -8,16 +8,18 @@ FREQUENCY_CUTOFF = 3 # number of times words must appear to be valid
 
 import datasets
 import nltk
-from nltk.stem import WordNetLemmatizer, PorterStemmer
-lemmatizer = WordNetLemmatizer()
-# ====
-# nltk.download('punkt_tab')
-# ==== > run this the first time
+from nltk.stem import WordNetLemmatizer
+try:
+    lemmatizer = WordNetLemmatizer()
+except Exception:
+    nltk.download('punkt_tab')
+    lemmatizer = WordNetLemmatizer()
 
 ds = datasets.load_dataset(dataset_name, dataset)['train']
 chosen_personas = []
 rejected_personas = []
 
+# compile personas
 for model in models:
 
     f = f'results/{model}/{dataset}/{run_name}/persona_inference.jsonl'
@@ -29,15 +31,13 @@ for model in models:
     chosen_personas.extend(json_list[:ds.num_rows])
     rejected_personas.extend(json_list[ds.num_rows:])
 
-
 all_personas = chosen_personas + rejected_personas
 all_labels = ['chosen' for _ in chosen_personas] + ['rejected' for _ in rejected_personas]
 
+# split personas
 label_ctr = dict()
 word_ctr = dict()
-
 split_words = ['rather than', 'over', 'versus', 'compared to', 'instead of']
-
 for p, l in zip(all_personas, all_labels):
     persona = nltk.sent_tokenize(p.lower())[0]
     for sw in split_words:
@@ -48,14 +48,17 @@ for p, l in zip(all_personas, all_labels):
         label_ctr[w, l] = label_ctr.get((w, l), 0) + 1
         word_ctr[w] = word_ctr.get(w, 0) + 1
 
+# P(word)
 p_label_given_word = dict()
 for w, ct in word_ctr.items():
     if ct < FREQUENCY_CUTOFF:
         continue
     for l in ['chosen', 'rejected']:
         p_label_given_word[l, w] = (1.0 * label_ctr.get((w, l), 0)) / word_ctr[w]
-    
+
+# P(word | chosen persona) 
 p_label_given_word_chosen = [item for item in p_label_given_word.items() if item[0][0] == 'chosen']
+# P(word | rejected persona) 
 p_label_given_word_rejected = [item for item in p_label_given_word.items() if item[0][0] == 'rejected']
 
 p_label_given_word_chosen = sorted(p_label_given_word_chosen, key=lambda item: -1 * item[1])
