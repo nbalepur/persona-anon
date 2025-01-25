@@ -1,8 +1,10 @@
+"""Main file for running all experiments"""
+
 # imports and directory setup
 import argparse
-from data_loader import PromptCollator
+from prompt_builder import PromptBuilder
 from checkpoint_handler import Checkpoint
-from model_loader import ModelFactory, OpenAI
+from model_loader import ModelFactory
 from enums import ModelType, PromptType
 import tqdm
 
@@ -184,28 +186,27 @@ def main(args):
     # load checkpoints
     checkpoint_loader = Checkpoint(args)
     
-    # load prompt collator
-    prompt_collator = PromptCollator(args)
+    # load prompt builder
+    prompt_builder = PromptBuilder(args)
 
-    for pt in args.prompt_types[0]:
+    for pt in args.prompt_types[0]: # iterate through all of the experiments
 
         # set output directories
         checkpoint_loader.set_directories(pt=pt) 
 
-        # get prompts and dataset size
-        prompts = prompt_collator.get_prompts(prompt_type=pt, checkpoint_loader=checkpoint_loader)
+        # get prompts for the experiment
+        prompts = prompt_builder.get_prompts(prompt_type=pt, checkpoint_loader=checkpoint_loader)
         
-        # set up inference bounds
+        # load the current checkpoint
         start, end = checkpoint_loader.setup_partition(len(prompts))
-
-        # load current save state and adjust starting point
         outputs = checkpoint_loader.load_checkpoint()
         start += len(outputs)
         
+        # iterate through prompts and generate outputs
         for idx in tqdm.tqdm(range(start, end)):
             prompt = prompts[idx]
             out_text = model.generate_text(prompt=prompt)
-            outputs.append({'raw_text': out_text, 'prompt': 'Prompt:' + prompt.split('\n\nPrompt:')[-1]})
+            outputs.append({'raw_text': out_text, 'prompt': prompt})
             checkpoint_loader.save_checkpoint(outputs=outputs, is_final=False)
 
         # final save

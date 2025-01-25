@@ -41,3 +41,4 @@ Rejected Response: Changes -Black Sabbath -> Charles Bradley  Is phenomenal
 Persona: The user is time-efficient and prefers responses that conveniently provide actionable resources.
 
 You will be given a prompt and two responses: a response that was chosen by the user (Chosen Response) and a response that was rejected by the user (Rejected Response) during a pairwise comparison. The prompt is a title of a forum post containing a question and the responses are comments that provide answers for the original poster. Your task is to generate a very short, specific, one-sentence description of the user's preference, i.e. a persona. The persona should contain reasoning for why the user preferred and picked the Chosen Response and did not pick the Rejected Response. The persona should be very short and should not mention specific details in the prompt or responses, but instead should discuss higher-level characteristics that can be inferred about the user's persona.
+

@@ -4,7 +4,7 @@ conda activate persona
 
 # dataset details
 inference_split="Mnemonic" # split of the dataset to use
-dataset_name="nbalepur/persona-inference" # huggingface dataset
+dataset_name="nbalepur/persona-inference" # huggingface preference dataset, requires columns with `prompt`, `chosen`, `rejected`
 partition="full" # partition of the dataset to run
 
 # model details

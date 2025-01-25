@@ -1,3 +1,5 @@
+"""Main file for prompt templates"""
+
 from abc import ABC, abstractmethod
 from enums import PromptType
 from typing import Any
@@ -6,24 +8,24 @@ from typing import Any
 class Prompt(ABC):
 
     def __init__(self, prompt_file, delim='\n\n'):
-        f = open(prompt_file, 'r')
-        self.base_prompt = f.read()
+        with open(prompt_file, 'r') as f:
+            self.base_prompt = f.read()
         self.delim = delim
         f.close()
 
     @abstractmethod
-    def create_inference_prompt(self, prompt, r1, r2, persona=None):
+    def create_inference_prompt(self, **kwargs):
         """Create the inference part of the prompt"""
         pass
 
-    def create_prompt(self, prompt, r1, r2, persona=None):
+    def create_prompt(self, **kwargs):
         """Create the full prompt"""
-        return self.base_prompt + self.delim + self.create_inference_prompt(prompt, r1, r2, persona)
+        return self.base_prompt + self.create_inference_prompt(**kwargs)
 
 # LLM Rationale Prompts
-class Vanilla(Prompt):
-    def create_inference_prompt(self, prompt, r1, r2, persona):
-        return f'Prompt: {prompt}\n---\nChosen Response: {r1}\n---\nRejected Response: {r2}\n---\nPersona:'
+class PersonaInference(Prompt):
+    def create_inference_prompt(self, prompt, chosen, rejected):
+        return f'Prompt: {prompt}\n---\nChosen Response: {chosen}\n---\nRejected Response: {rejected}\n---\nPersona:'
 
 # LLM Persona Evaluation Prompts
 class PersonaEvalPrompt(Prompt):
@@ -32,18 +34,16 @@ class PersonaEvalPrompt(Prompt):
 
 # Preference Prompts
 class PreferenceNoPersona(Prompt):
-    def create_inference_prompt(self, prompt, r1, r2, persona):
+    def create_inference_prompt(self, prompt, r1, r2):
         return f'Prompt: {prompt}\n---\nResponse 1: {r1}\n---\nResponse 2: {r2}\n---\nBetter Response:'
 
 class PreferenceWithPersona(Prompt):
-    def create_inference_prompt(self, prompt, r1, r2, persona):
-        p1, p2 = persona
-        return f'Prompt: {prompt}\n---\nResponse 1: {r1}\n---\nPersona 1: {p1}\n---\nResponse 2: {r2}\n---\nPersona 2: {p2}\n---\nBetter Response:'
+    def create_inference_prompt(self, prompt, r1, r2, persona1, persona2):
+        return f'Prompt: {prompt}\n---\nResponse 1: {r1}\n---\nPersona 1: {persona1}\n---\nResponse 2: {r2}\n---\nPersona 2: {persona2}\n---\nBetter Response:'
 
 class PersonaPreference(Prompt):
-    def create_inference_prompt(self, prompt, r1, r2, persona):
-        p1, p2 = persona
-        return f'Persona 1: {p1}\n---\nPersona 2: {p2}\n---\nBetter Persona:'
+    def create_inference_prompt(self, persona1, persona2):
+        return f'Persona 1: {persona1}\n---\nPersona 2: {persona2}\n---\nBetter Persona:'
 
 class PromptFactory:
 
@@ -51,11 +51,11 @@ class PromptFactory:
 
         ds_name_parsed = args.inference_split
         self.prompt_dir = f'{args.prompt_dir}{prompt_type.value}/{ds_name_parsed}.txt'
-        self.prompt_dir_eval = f'{args.prompt_dir}persona_accuracy/{ds_name_parsed}.txt'
 
+        # map experiment -> prompt template
         self.prompt_type_map = {
-            PromptType.persona_inference: Vanilla(self.prompt_dir),
-            PromptType.persona_accuracy: PersonaEvalPrompt(self.prompt_dir_eval),
+            PromptType.persona_inference: PersonaInference(self.prompt_dir),
+            PromptType.persona_accuracy: PersonaEvalPrompt(self.prompt_dir),
             PromptType.persona_prefs: PersonaPreference(self.prompt_dir),
         }
         

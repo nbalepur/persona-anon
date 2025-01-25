@@ -102,15 +102,15 @@ The code for the Persona Inference experiments (Sections 2 and 3 in the paper) i
 | `max_tokens`             | `200`                              | Maximum number of tokens to generate.                                        |
 | `stop_token`             | `\\nPrompt:`                      | Token used to stop generation.                                               |
 | `device_map`             | `auto`                             | Device to load tensors (`'cpu'`, `'cuda'`, `'auto'`).                        |
-| `hf_token`               | `${HF_READ_TOKEN:-}`               | Hugging Face token for accessing datasets/models (specify in .env).                            |
-| `open_ai_token`          | `${OPEN_AI_TOKEN:-}`               | OpenAI API token for accessing OpenAI models (specify in .env).                                |
-| `cohere_token`           | `${COHERE_TOKEN:-}`                | Cohere API token for accessing Cohere models (specify in .env).                                |
-| `anthropic_token`        | `${ANTHROPIC_TOKEN:-}`             | Anthropic API token for accessing Anthropic models (specify in .env).                          |
+| `hf_token`               | `hf_...`               | Hugging Face token for accessing datasets/models (specify in .env).                            |
+| `open_ai_token`          | `sk-...`               | OpenAI API token for accessing OpenAI models (specify in .env).                                |
+| `cohere_token`           | `...`                | Cohere API token for accessing Cohere models (specify in .env).                                |
+| `anthropic_token`        | `...`             | Anthropic API token for accessing Anthropic models (specify in .env).                          |
 | `res_dir`                | `results/`                         | Directory to save results.                                                   |
 | `prompt_dir`             | `prompts/`                         | Directory containing prompts.                                                |
 | `cache_dir`              | `""`                               | Directory to cache any models/datasets.                                               |
-| `load_in_4bit`           | `--True` (flag)                    | Flag to load models in 4-bit precision (if applicable).                      |
-| `load_in_8bit`           | `--True` (flag)                    | Flag to load models in 8-bit precision (if applicable).                      |
+| `load_in_4bit`           | `--True` (flag)                    | Flag to load models in 4-bit precision.                      |
+| `load_in_8bit`           | `--True` (flag)                    | Flag to load models in 8-bit precision.                      |
 
 We provide a sample bash script to help you run the function in `/scripts/example.sh`. The script should be run via:
 
@@ -144,7 +144,8 @@ After running persona inference, you can augment your dataset with LLM-inferred 
 | `model`                  | `gpt-4o-mini`           | Model used to generate personas.                                     |
 | `inference_split`        | `BeaverTails`           | Inference split used to create personas.                             |
 | `new_dataset_name`       | `"nbalepur/persona-inference-augmented"`                    | New name for the Hugging Face dataset after augmentation.                         |
-| `hf_write_token`         | `${HF_WRITE_TOKEN:-}`   | Hugging Face write token for uploading the new dataset.                 |
+| `hf_write_token`         | `hf_...`   | Hugging Face write token for uploading the new dataset.                 |
+| `push_to_hub`         | `--True` (flag)   | Flag to push the dataset to the huggingface hub                |
 
 We again provide a sample bash script at:
 
