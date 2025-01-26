@@ -10,6 +10,7 @@ STATIC_PARAMS = {
     'model_nickname': 'llama_1b',
     'base_model_name': 'meta-llama/Llama-3.2-1B',
     'use_wandb': True,
+    'hf_dataset_name': 'nbalepur/persona-tailoring',
     'dataset_name': 'BeaverTails',
     'load_in_8bit': False,
     'load_in_4bit': False,

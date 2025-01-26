@@ -12,7 +12,7 @@ class PromptBuilder:
         prompt_factory = PromptFactory(args=self.args, prompt_type=prompt_type)
         prompt_parser = prompt_factory.get_prompt(prompt_type)
 
-        # data inputs used for the prompt
+        # data inputs used to infill the prompt template
         data_factory = DataFetcherFactory()
         data_fetcher = data_factory.get_data_fetcher(prompt_type=prompt_type, args=self.args)
         prompt_inputs = data_fetcher.get_data()

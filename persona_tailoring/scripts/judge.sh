@@ -2,11 +2,11 @@
 # source ... -> activate your conda environment
 conda activate persona
 
-model_type_base="dpo"
+model_type_base="sft"
 training_type_base="chosen"
 inference_type_base="gold-chosen"
 
-model_type_test="sft"
+model_type_test="dpo"
 training_type_test="chosen"
 inference_type_test="gold-chosen"
 

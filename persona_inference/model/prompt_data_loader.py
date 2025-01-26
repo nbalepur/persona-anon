@@ -16,7 +16,7 @@ class DataFetcher(ABC):
     @abstractmethod
     def get_data(self):
         """Retrieve data from the source."""
-        """Output: List of arguments in a dictionary"""
+        """Output: List of keyword arguments in dictionary form"""
         pass
 
     def collect_files(self, keywords, res_dir):

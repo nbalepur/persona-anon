@@ -5,18 +5,20 @@ conda activate persona
 # dataset details
 inference_split="Mnemonic" # split of the dataset to use
 dataset_name="nbalepur/persona-inference" # huggingface preference dataset, requires columns with `prompt`, `chosen`, `rejected`
-partition="full" # partition of the dataset to run
 
 # model details
 model_type="open_ai" # type of the model (see ModelType in enums.py)
 model_name="gpt-4o-mini" # endpoint for the model
 
-# how to identify this run
-run_name="default"
-
 # experiments (see PromptType in enums.py)
 experiments=("persona_inference")
 experiments_str=$(IFS=" "; echo "${experiments[*]}")
+
+# how to identify this run
+run_name="default"
+
+# partition of the dataset to run (full, first_half, first_quarter, ...)
+partition="full"
 
 # model generation parameters
 num_shots=0
@@ -26,6 +28,11 @@ max_tokens=200
 stop_token="\nPrompt:"
 device_map="auto" # where to load tensors ('cpu', 'cuda', 'auto')
 
+# directory setup
+res_dir="results/" # Results folder directory
+prompt_dir="prompts/" # Prompt folder directory
+cache_dir="" # Cache directory to save any models
+
 # API tokens
 if [ -f ../.env ]; then
     export $(cat ../.env | xargs)
@@ -34,11 +41,6 @@ hf_token="${HF_READ_TOKEN:-}"
 open_ai_token="${OPEN_AI_TOKEN:-}"
 cohere_token="${COHERE_TOKEN:-}"
 anthropic_token="${ANTHROPIC_TOKEN:-}"
-
-# directory setup
-res_dir="results/" # Results folder directory
-prompt_dir="prompts/" # Prompt folder directory
-cache_dir="" # Cache directory to save any models
 
 # there are also --True flags for `load_in_4bit` and `load_in_8bit`
 python3 model/run_model.py \

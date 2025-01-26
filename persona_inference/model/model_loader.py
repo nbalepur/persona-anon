@@ -15,7 +15,7 @@ class LLM(ABC):
         pass
 
     @abstractmethod
-    def generate_text(self, prompt):
+    def generate_text(self, prompt: str) -> str:
         """Generate text from a prompt"""
         pass
 

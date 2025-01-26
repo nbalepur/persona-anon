@@ -191,11 +191,11 @@ def main(args):
 
     for pt in args.prompt_types[0]: # iterate through all of the experiments
 
-        # set output directories
+        # set results directory for the experiment
         checkpoint_loader.set_directories(pt=pt) 
 
         # get prompts for the experiment
-        prompts = prompt_builder.get_prompts(prompt_type=pt, checkpoint_loader=checkpoint_loader)
+        prompts = prompt_builder.get_prompts(prompt_type=pt)
         
         # load the current checkpoint
         start, end = checkpoint_loader.setup_partition(len(prompts))

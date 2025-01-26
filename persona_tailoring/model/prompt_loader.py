@@ -6,7 +6,7 @@ def create_exemplars(ex, use_persona: bool, add_eot: bool, add_response: bool, i
     prompts = []
     for idx in range(len(ex['prompt'])):
 
-         # included in every prompt
+        # included in every prompt
         prompt = f"Prompt: {ex['prompt'][idx]}"
         if use_persona:
             prompt += f"\nPersona: {ex['persona'][idx]}"
