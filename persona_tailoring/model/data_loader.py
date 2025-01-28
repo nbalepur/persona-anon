@@ -1,3 +1,7 @@
+"""
+Helper class for loading training, validation, and testing preference datasets (augmented with personas)
+"""
+
 import datasets
 from model import config
 from model.util import TrainingType, Persona

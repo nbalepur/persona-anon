@@ -1,3 +1,7 @@
+"""
+Inference for the Supervised Fine-Tuning models
+"""
+
 from model.data_loader import DataLoader
 from model.prompt_loader import fetch_testing_template
 from model.util import StoppingCriteriaSub, TrainingType, InferenceType, Persona

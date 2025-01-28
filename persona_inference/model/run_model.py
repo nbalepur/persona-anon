@@ -1,4 +1,12 @@
-"""Main file for running all experiments"""
+"""
+Entry point for running LLM experiments
+
+This script:
+1) Loads an LLM
+2) Loads the prompts for this experiment
+3) Runs (1) on (2) and saves all of the outputs
+"""
+
 
 # imports and directory setup
 import argparse

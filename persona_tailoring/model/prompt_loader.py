@@ -1,3 +1,6 @@
+"""
+Helper functions for constructing prompt templates for model training/inference
+"""
 
 from model.util import TrainingType, InferenceType, ModelType
 

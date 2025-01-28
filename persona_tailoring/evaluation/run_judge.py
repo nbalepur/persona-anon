@@ -1,3 +1,7 @@
+"""
+Uses Prometheus to judge the Personalization and Quality of responses from two different models
+"""
+
 from model.util import TrainingType, InferenceType, Persona, ModelType
 from model import config
 

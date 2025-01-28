@@ -1,3 +1,7 @@
+"""
+After Prometheus has been run (run_judge.py), computes the win rate of one model over the other
+"""
+
 from model.util import TrainingType, InferenceType, Persona, ModelType
 from model import config
 

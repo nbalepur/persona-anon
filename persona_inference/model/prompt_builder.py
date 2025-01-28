@@ -1,3 +1,10 @@
+"""
+Helper functions/class to retrieve prompts for a specific experiment. Prompts consist of two parts:
+1) a prompt template (e.g. f-string)
+2) a list of data inputs (keyword arguments) that can infill the prompt template
+Combining (1) and (2), you get a list of prompts
+"""
+
 from persona_inference.model.prompt_template_loader import PromptFactory, PromptType
 from persona_inference.model.prompt_data_loader import DataFetcherFactory
 

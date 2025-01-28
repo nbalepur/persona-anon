@@ -1,3 +1,7 @@
+"""
+Merges the DPO LoRA weights with the original model
+"""
+
 from model.util import TrainingType
 from model import config
 

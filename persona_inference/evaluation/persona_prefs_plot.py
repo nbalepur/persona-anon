@@ -1,3 +1,7 @@
+"""
+Code to generate the plots for measuring LLM preferences over personas (Figure 4)
+"""
+
 run_name = 'default' # name of the run
 evaluator_models = ['gpt-4o-mini'] # models that judged
 models = ['gpt-4o-mini'] # models that were judged

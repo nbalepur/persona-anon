@@ -1,3 +1,7 @@
+"""
+Abstract base class implementation of an LLM. Contains several LLM providers and ways to get LLM outputs for input prompts
+"""
+
 from abc import ABC, abstractmethod
 from enums import ModelType
 import time

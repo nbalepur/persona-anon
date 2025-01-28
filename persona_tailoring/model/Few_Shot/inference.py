@@ -1,3 +1,7 @@
+"""
+Inference for the Few-shot generation strategy
+"""
+
 from model.data_loader import DataLoader
 from model.prompt_loader import fetch_training_template, fetch_testing_template
 from model.util import StoppingCriteriaSub, Persona, TrainingType, InferenceType, ModelType

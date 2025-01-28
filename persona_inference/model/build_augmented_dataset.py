@@ -1,3 +1,11 @@
+"""
+Entry point for combining LLM personas with the original preference dataset
+
+Once LLM personas have been inferred and their quality has been verified, this script combines the original preference dataset 
+with the LLM-inferred personas and saves it as a new, augmented dataset 
+"""
+
+
 import argparse
 import datasets
 import json

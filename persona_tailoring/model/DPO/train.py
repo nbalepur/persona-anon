@@ -1,3 +1,7 @@
+"""
+Trains the DPO model
+"""
+
 from model.data_loader import DataLoader
 from model.prompt_loader import fetch_training_template
 from model.util import TrainingType, ModelType

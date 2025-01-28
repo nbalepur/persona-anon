@@ -1,3 +1,6 @@
+"""
+Code to uncover salient words in chosen and rejected personas (Table 1)
+"""
 
 dataset = 'BeaverTails' # dataset name
 models = ['gpt-4o-mini'] # models with personas to test

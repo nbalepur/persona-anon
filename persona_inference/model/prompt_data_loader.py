@@ -1,4 +1,6 @@
-"""Main file for data inputs to prompt templates"""
+"""
+Abstract base class implementation of a DataFetcher. Uses a specified preference dataset and experiment to obtain a list of data inputs to use for the prompt.
+"""
 
 from enums import PromptType
 import json

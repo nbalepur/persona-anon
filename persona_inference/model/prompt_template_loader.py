@@ -1,4 +1,6 @@
-"""Main file for prompt templates"""
+"""
+Abstract base class implementation of a Prompt Template. Uses a specified experiment to obtain a prompt template (e.g. f-string) that can include data inputs.
+"""
 
 from abc import ABC, abstractmethod
 from enums import PromptType

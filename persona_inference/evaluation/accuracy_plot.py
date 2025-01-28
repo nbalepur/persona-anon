@@ -1,3 +1,7 @@
+"""
+Code to generate the plots for measuring persona accuracy (Figure 3)
+"""
+
 run_name = 'default'  # which run name?
 evaluator_models = ['gpt-4o-mini'] # what are the evaluator models?
 datasets = ['BeaverTails'] # which datasets?
