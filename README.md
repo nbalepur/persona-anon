@@ -120,7 +120,7 @@ bash scripts/example.sh
 
 ### Using LLMs for Persona Inference
 
-To evaluate the accuracy of any model that has run Persona Inference, perform the following:
+To run Persona Inference with a model, perform the following:
 1. Set `run_name` to a string defining what the run should be called.
 2. Set `model_name` and `model_type` to the model you want to use for persona inference.
 3. Set `experiments=(persona_inference)`.

@@ -42,6 +42,12 @@ def main():
         default="",
     )
     parser.add_argument(
+        "--res_dir",
+        type=str,
+        help="Directory of the output results folder",
+        default="results",
+    )
+    parser.add_argument(
         "--push_to_hub",
         action='store_true',
         help="Should we push the model to the hub?",
@@ -52,7 +58,7 @@ def main():
     args = parser.parse_args()
     ds = datasets.load_dataset(args.dataset_name, args.inference_split)['train']
 
-    f = f'results/{args.model}/{args.inference_split}/{args.run_name}/persona_inference.jsonl'
+    f = f'{args.res_dir}/{args.model}/{args.inference_split}/{args.run_name}/persona_inference.jsonl'
     with open(f, 'r') as json_file:
         json_list = list(json_file)
 

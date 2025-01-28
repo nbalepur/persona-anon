@@ -101,7 +101,7 @@ def main(args):
 
     # Load test data and apply template
     dl = DataLoader(config.params['dataset_name'])
-    test_prompt_template = fetch_testing_template(training_type=args.training_type, dataset_split=config.params['dataset_name'])
+    test_prompt_template = fetch_testing_template(training_type=persona.training_type, inference_type=persona.inference_type, dataset_split=config.params['dataset_name'])
     ds_test = dl.load_test_data(persona).map(test_prompt_template, batched=True)
     inf_prompts = ds_test['prompt']
 

@@ -1,6 +1,6 @@
 from model.data_loader import DataLoader
 from model.prompt_loader import fetch_training_template
-from model.util import TrainingType
+from model.util import TrainingType, ModelType
 from model import config
 
 import argparse
@@ -53,7 +53,7 @@ def main(args):
     dl = DataLoader(config.params['dataset_name'])
     ds_dpo_train, ds_dpo_eval = dl.load_dpo_data(TrainingType(args.training_type))
 
-    prompt_training_template = fetch_training_template(training_type=TrainingType(args.training_type), add_eot=False, add_response=False)
+    prompt_training_template = fetch_training_template(training_type=TrainingType(args.training_type), model_type=ModelType.dpo)
     ds_dpo_train = ds_dpo_train.map(prompt_training_template, batched=True).select_columns(['prompt', 'chosen', 'rejected'])
     ds_dpo_eval = ds_dpo_eval.map(prompt_training_template, batched=True).select_columns(['prompt', 'chosen', 'rejected'])
 

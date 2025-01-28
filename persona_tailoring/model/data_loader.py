@@ -28,7 +28,7 @@ class DataLoader:
 
     
     def load_few_shot_data(self, persona: Persona):
-        """Load data for supervised fine-tuning (SFT)."""
+        """Load data for few-shot prompting."""
         """Output: Training Dataset with columns `prompt`, `persona`, `response`"""
 
         train_response_type = persona.training_type

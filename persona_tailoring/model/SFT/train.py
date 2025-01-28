@@ -1,6 +1,6 @@
 from model.data_loader import DataLoader
 from model.prompt_loader import fetch_training_template
-from model.util import TrainingType
+from model.util import TrainingType, ModelType
 from model import config
 
 import argparse
@@ -40,7 +40,7 @@ def main(args):
     ds_sft_train, ds_sft_eval = dl.load_sft_data(TrainingType(args.training_type))
 
     # Apply persona-based prompts
-    train_prompt_template = fetch_training_template(training_type=TrainingType(args.training_type), add_eot=True, add_response=True)
+    train_prompt_template = fetch_training_template(training_type=TrainingType(args.training_type), model_type=ModelType.sft)
     ds_sft_train = ds_sft_train.map(train_prompt_template, batched=True)
     ds_sft_eval = ds_sft_eval.map(train_prompt_template, batched=True)
 

@@ -22,7 +22,7 @@ class Prompt(ABC):
         """Create the full prompt"""
         return self.base_prompt + self.create_inference_prompt(**kwargs)
 
-# LLM Rationale Prompts
+# LLM Persona Inference Prompts
 class PersonaInference(Prompt):
     def create_inference_prompt(self, prompt, chosen, rejected):
         return f'Prompt: {prompt}\n---\nChosen Response: {chosen}\n---\nRejected Response: {rejected}\n---\nPersona:'

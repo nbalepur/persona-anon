@@ -1,6 +1,6 @@
 from model.data_loader import DataLoader
 from model.prompt_loader import fetch_training_template, fetch_testing_template
-from model.util import StoppingCriteriaSub, Persona, TrainingType, InferenceType
+from model.util import StoppingCriteriaSub, Persona, TrainingType, InferenceType, ModelType
 from model import config
 
 import json
@@ -59,11 +59,11 @@ def main(args):
 
     # Load train and test data
     train = dl.load_few_shot_data(persona)
-    train_prompt_template = fetch_training_template(training_type=persona.training_type, add_eot=False, add_response=True)
+    train_prompt_template = fetch_training_template(training_type=persona.training_type, model_type=ModelType.fewshot)
     train = train.map(train_prompt_template, batched=True)
     
     test = dl.load_test_data(persona)
-    test_prompt_template = fetch_testing_template(training_type=persona.training_type, dataset_split=dataset_split)
+    test_prompt_template = fetch_testing_template(training_type=persona.training_type, inference_type=persona.inference_type, dataset_split=dataset_split)
     test = test.map(test_prompt_template, batched=True)
 
     # Generate inference prompts

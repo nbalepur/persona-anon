@@ -8,7 +8,7 @@ import torch
 from transformers import AutoTokenizer, pipeline
 from huggingface_hub import HfFolder
 
-# Abstract base class for implementing zero-shot prompts
+# Abstract base class for implementing LLMs
 class LLM(ABC):
 
     def __init__(self):
