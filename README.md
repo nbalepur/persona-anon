@@ -38,22 +38,6 @@ Our key findings are three-fold:
 
 We argue for an abductive view of preferences for personalization, asking not only which response is better but when, why, and for whom.
 
-## Datasets and Pre-trained Models
-
-We provide pre-processed datasets and pre-trained models on Hugging Face: [Alignment Personalization Repository](https://huggingface.co/collections/nbalepur/alignment-personalization-6761ee17403573affaa670aa). Specifically, it contains the following datasets:
-- [nbalepur/persona-inference](https://huggingface.co/datasets/nbalepur/persona-inference): Dataset used for Persona Inference experiments.
-- [nbalepur/persona-tailoring](https://huggingface.co/datasets/nbalepur/persona-tailoring): Dataset used for Persona Tailoring experiments.
-
-We also provide the following preference-tuned, personalized models:
-- [nbalepur/Llama-3.1-8B-PT-DPO-BeaverTails](https://huggingface.co/nbalepur/Llama-3.1-8B-PT-DPO-BeaverTails): Answers advice queries tailored to personas.
-- [nbalepur/Llama-3.1-8B-PT-DPO-HHH](https://huggingface.co/nbalepur/Llama-3.1-8B-PT-DPO-HHH): Responds to dialogue requests tailored to personas.
-- [nbalepur/Llama-3.1-8B-PT-DPO-Mnemonic](https://huggingface.co/nbalepur/Llama-3.1-8B-PT-DPO-Mnemonice): Generates mnemonic devices tailored to personas.
-
-All models use the following prompt template:
-```
-Prompt: [input prompt]
-Persona: [input persona]
-Response:
 ```
 
 ## Setup
@@ -291,7 +275,3 @@ bash scripts/judge.sh
 We note the following limitations with our approach:
 1. Models have not undergone safety training, so they can produce harmful, biased, or irrelevant text when instructed to.
 2. The Anthropic HHH models often generate repetitive text. To fix this, we recommend using decoding strategies apart from greedy decoding. In the paper, we filtered out these repetitive outputs during evaluation
-
-## Contact
-
-If you have any questions about the paper or repository, feel free to raise an issue or contact me, Nishant Balepur, at [nbalepur@umd.edu](mailto:nbalepur@umd.edu)
