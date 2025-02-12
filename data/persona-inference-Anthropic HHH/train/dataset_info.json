@@ -1,0 +1,46 @@
+{
+  "builder_name": "parquet",
+  "citation": "",
+  "config_name": "Anthropic HHH",
+  "dataset_name": "persona-inference",
+  "dataset_size": 218127,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/nbalepur/persona-inference@e593f2f7cd6133a8121931dc5e74b0de213db256/Anthropic HHH/train-00000-of-00001.parquet": {
+      "num_bytes": 137845,
+      "checksum": null
+    }
+  },
+  "download_size": 137845,
+  "features": {
+    "prompt": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "chosen": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "rejected": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 355972,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 218127,
+      "num_examples": 300,
+      "dataset_name": "persona-inference"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

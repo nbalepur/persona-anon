@@ -1,0 +1,112 @@
+{
+  "builder_name": "parquet",
+  "citation": "",
+  "config_name": "BeaverTails",
+  "dataset_name": "persona-tailoring",
+  "dataset_size": 5327968,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/nbalepur/persona-tailoring@6043b48f438cec6d6f0e5a2fc01bab5877aff3fd/BeaverTails/fewshot-00000-of-00001.parquet": {
+      "num_bytes": 19059,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona-tailoring@6043b48f438cec6d6f0e5a2fc01bab5877aff3fd/BeaverTails/sft_train-00000-of-00001.parquet": {
+      "num_bytes": 895410,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona-tailoring@6043b48f438cec6d6f0e5a2fc01bab5877aff3fd/BeaverTails/sft_val-00000-of-00001.parquet": {
+      "num_bytes": 249961,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona-tailoring@6043b48f438cec6d6f0e5a2fc01bab5877aff3fd/BeaverTails/dpo_train-00000-of-00001.parquet": {
+      "num_bytes": 894621,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona-tailoring@6043b48f438cec6d6f0e5a2fc01bab5877aff3fd/BeaverTails/dpo_val-00000-of-00001.parquet": {
+      "num_bytes": 258034,
+      "checksum": null
+    },
+    "hf://datasets/nbalepur/persona-tailoring@6043b48f438cec6d6f0e5a2fc01bab5877aff3fd/BeaverTails/test-00000-of-00001.parquet": {
+      "num_bytes": 482998,
+      "checksum": null
+    }
+  },
+  "download_size": 2800083,
+  "features": {
+    "prompt": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "chosen": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "rejected": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "chosen_persona_gold": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "rejected_persona_gold": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "chosen_persona_retr": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "rejected_persona_retr": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 8128051,
+  "splits": {
+    "fewshot": {
+      "name": "fewshot",
+      "num_bytes": 8509,
+      "num_examples": 5,
+      "dataset_name": "persona-tailoring"
+    },
+    "sft_train": {
+      "name": "sft_train",
+      "num_bytes": 1751952,
+      "num_examples": 977,
+      "dataset_name": "persona-tailoring"
+    },
+    "sft_val": {
+      "name": "sft_val",
+      "num_bytes": 442608,
+      "num_examples": 244,
+      "dataset_name": "persona-tailoring"
+    },
+    "dpo_train": {
+      "name": "dpo_train",
+      "num_bytes": 1767797,
+      "num_examples": 982,
+      "dataset_name": "persona-tailoring"
+    },
+    "dpo_val": {
+      "name": "dpo_val",
+      "num_bytes": 455469,
+      "num_examples": 246,
+      "dataset_name": "persona-tailoring"
+    },
+    "test": {
+      "name": "test",
+      "num_bytes": 901633,
+      "num_examples": 499,
+      "dataset_name": "persona-tailoring"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

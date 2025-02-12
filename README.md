@@ -40,6 +40,10 @@ We argue for an abductive view of preferences for personalization, asking not on
 
 ```
 
+## Datasets and Pre-trained Models
+
+All of our datasets are located in the `data` folder. We will release all models and datasets on HuggingFace upon acceptance.
+
 ## Setup
 
 Follow these steps to set up the environment:
